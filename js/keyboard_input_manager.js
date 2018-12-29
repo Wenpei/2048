@@ -169,7 +169,7 @@ KeyboardInputManager.prototype.getRecord = function (callback) {
 }
 KeyboardInputManager.prototype.onChain = function (name, score, callback) {
   const web3 = window.web3
-  loadJSON("../contract_abi.json",
+  loadJSON("contract_abi.json",
     (jsonInterface) => {
       // const contractWinner = new web3.eth.Contract(jsonInterface, contract_address)
       // web3.eth.getAccounts(
