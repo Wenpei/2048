@@ -1,4 +1,4 @@
-const contract_address = "0x038965426aa3fb66bb63142ea7f89991795f84f8";
+const contract_address = "0xc8a7ec13f7a5e1ab2bc1bcec46a95ed205513192";
 
 function KeyboardInputManager() {
   this.events = {};
@@ -78,7 +78,7 @@ KeyboardInputManager.prototype.listen = function () {
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
-  
+
   //var scoreContainer = document.getElementsByClassName("score-container")[0];
 
   gameContainer.addEventListener(this.eventTouchstart, function (event) {
@@ -167,22 +167,37 @@ KeyboardInputManager.prototype.getRecord = function (callback) {
     }
   );
 }
-KeyboardInputManager.prototype.onChain = function (name, score) {
+KeyboardInputManager.prototype.onChain = function (name, score, callback) {
   const web3 = window.web3
   loadJSON("../contract_abi.json",
     (jsonInterface) => {
-      const contractWinner = new web3.eth.Contract(jsonInterface, contract_address)
+      // const contractWinner = new web3.eth.Contract(jsonInterface, contract_address)
+      // web3.eth.getAccounts(
+      //   (error, accounts) => {
+      //     contractWinner.methods.addRecord(name, score, accounts[0]).send(
+      //       { from: accounts[0] }
+      //     ).on('transactionHash',
+      //       hash => console.log(hash)
+      //     ).on('receipt',
+      //       receipt => console.log(receipt)
+      //     ).on('confirmation', (confirmationNumber, receipt) => {
+      //       console.log(receipt)
+      //     }).on('error', console.error);
+      //   }
+      // )
+
       web3.eth.getAccounts(
         (error, accounts) => {
-          contractWinner.methods.addRecord(name, score, accounts[0]).send(
-            { from: accounts[0] }
-          ).on('transactionHash',
-            hash => console.log(hash)
-          ).on('receipt',
-            receipt => console.log(receipt)
-          ).on('confirmation', (confirmationNumber, receipt) => {
-            console.log(receipt)
-          }).on('error', console.error);
+          const contractWinner = new web3.eth.Contract(jsonInterface, contract_address)
+          const data = contractWinner.methods.addRecord(name, score, accounts[0]).encodeABI();
+          web3.eth.sendTransaction({
+            from: accounts[0],
+            to: contract_address,
+            value: '0x00',
+            data: data
+          }, (error, txHash) => {
+            callback(error, txHash)
+          })
         }
       )
     },
@@ -199,10 +214,13 @@ KeyboardInputManager.prototype.restart = function (event) {
 
 KeyboardInputManager.prototype.keepPlaying = function (event) {
   var userNameContainer = document.getElementsByClassName("user-name")[0];
-  const name = userNameContainer.value?userNameContainer.value:"无名大侠"
-  this.onChain(name, window.onChainScore);
-  event.preventDefault();
-  this.emit("keepPlaying");
+  const name = userNameContainer.value ? userNameContainer.value : "无名大侠"
+  this.onChain(name, window.onChainScore, 
+    (error, txHash) => {
+      console.log(txHash);
+      event.preventDefault();
+      this.emit("keepPlaying");
+    });
 };
 
 KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {

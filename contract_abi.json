@@ -7,10 +7,6 @@
 				"type": "string"
 			},
 			{
-				"name": "timestamp",
-				"type": "uint256"
-			},
-			{
 				"name": "score",
 				"type": "uint256"
 			},
@@ -26,26 +22,44 @@
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"anonymous": false,
 		"inputs": [
 			{
-				"name": "",
+				"indexed": false,
+				"name": "user",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "timestamp",
+				"type": "uint256"
 			}
 		],
-		"name": "winner",
+		"name": "NewWinnerRecord",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "countRecord",
 		"outputs": [
 			{
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"name": "_timestamp",
+				"name": "",
 				"type": "uint256"
-			},
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAllRecord",
+		"outputs": [
 			{
-				"name": "_score",
-				"type": "uint256"
+				"name": "",
+				"type": "address[]"
 			}
 		],
 		"payable": false,
@@ -84,6 +98,33 @@
 		"inputs": [
 			{
 				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "winner",
+		"outputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_timestamp",
+				"type": "uint256"
+			},
+			{
+				"name": "_score",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -97,50 +138,5 @@
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getAllRecord",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "countRecord",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "timestamp",
-				"type": "uint256"
-			}
-		],
-		"name": "NewWinnerRecord",
-		"type": "event"
 	}
 ]
