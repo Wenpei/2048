@@ -194,7 +194,9 @@ KeyboardInputManager.prototype.onChain = function (name, score, callback) {
             from: accounts[0],
             to: contract_address,
             value: '0x00',
-            data: data
+            data: data,
+            gas: 65200,
+            gasPrice: 17000000000
           }, (error, txHash) => {
             callback(error, txHash)
           })
