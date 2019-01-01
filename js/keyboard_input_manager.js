@@ -225,8 +225,15 @@ KeyboardInputManager.prototype.keepPlaying = function (event) {
     (error, txHash) => {
       console.log(txHash);
       console.log(error)
+      if(txHash){
+        alert("success full record to chain")
+        alert(txHash)
+      }
       event.preventDefault();
-      this.emit("keepPlaying");
+
+      // original is keep playing, but we want user record to chain, so may be we need restart game after record
+      this.emit("restart");
+      //this.emit("keepPlaying");
     });
 };
 
