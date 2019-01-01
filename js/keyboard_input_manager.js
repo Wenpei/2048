@@ -223,6 +223,7 @@ KeyboardInputManager.prototype.keepPlaying = function (event) {
   this.onChain(name, window.onChainScore,
     (error, txHash) => {
       console.log(txHash);
+      console.log(error)
       event.preventDefault();
       this.emit("keepPlaying");
     });
