@@ -197,7 +197,7 @@ KeyboardInputManager.prototype.onChain = function (name, score, callback) {
           web3.eth.sendTransaction({
             from: accounts[0],
             to: contract_address,
-            value: '0',
+            value: 0,
             data: data,
             gas: 85200,
             gasPrice: 10000000000
