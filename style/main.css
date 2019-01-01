@@ -759,7 +759,7 @@ hr {
 .user-name{
   height: 32px;
 
-  padding: 0 10px;
+  padding: 2 10px;
   border-radius: 3px;
   border: none;
   outline: none;
@@ -770,7 +770,7 @@ hr {
   line-height: 42px;
 
   /* text-align: center; */
-  font-size: 20px;
+  font-size: 15px;
 }
 .user-name::placeholder{
   color: lightgray
