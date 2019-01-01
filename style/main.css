@@ -757,12 +757,21 @@ hr {
   .game-message .lower {
     margin-top: 30px !important; } }
 .user-name{
-  padding: 0 20px;
+  height: 32px;
+
+  padding: 0 10px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+
   text-decoration: none;
-  color: #8f7a66;
-  height: 40px;
+  color: #776e65;
   line-height: 42px;
 
-  text-align: center;
-  font-size: 22px;
+  /* text-align: center; */
+  font-size: 20px;
+}
+.user-name::placeholder{
+  color: lightgray
 }
