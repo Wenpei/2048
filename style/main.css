@@ -757,6 +757,7 @@ hr {
   .game-message .lower {
     margin-top: 30px !important; } }
 .user-name{
+  width: 90%;
   height: 32px;
 
   padding: 0 10px;
